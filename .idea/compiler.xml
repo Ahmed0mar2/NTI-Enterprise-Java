@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="NTI_Day6" />
         <module name="NTI_Day5" />
         <module name="NTI_Day4" />
       </profile>
