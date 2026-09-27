@@ -2,6 +2,29 @@
 .idea/
 *.iml
 out/
+*.iws
+*.ipr
 
 ### Maven ###
 **/target/
+
+### Build output ###
+**/build/
+**/bin/
+**/classes/
+*.class
+
+### Other IDEs ###
+.vscode/
+.project
+.classpath
+.settings/
+
+### Local and OS files ###
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+*.swp
+*.swo

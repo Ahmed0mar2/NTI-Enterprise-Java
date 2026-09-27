@@ -1,4 +1,5 @@
 package com.training.empmanager.notify;
 
-public interface notifier {
+public interface Notifier {
+    void send(String message);
 }
