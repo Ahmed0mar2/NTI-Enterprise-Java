@@ -43,15 +43,23 @@ public class EmployeeServiceImpl implements EmployeeService {
         try {
             auditLogger.log();
             employeeValidator.validate(employee);
-            if (getEmployeeById(employee.getId()) == null) {
-                auditLogger.log();
-                repository.saveEmployee(employee);
-                notificationManager.sendNotification("New employee were added: " + employee.getName());
-                auditLogger.log();
-                return true;
+
+            if (repository.findById(employee.getId()).isPresent()) {
+                return false;
             }
-            return false;
+
+            auditLogger.log();
+            repository.saveEmployee(employee);
+
+            notificationManager.sendNotification(
+                    "New employee was added: " + employee.getName()
+            );
+
+            auditLogger.log();
+            return true;
+
         } catch (Exception e) {
+            System.out.println("Failed to add employee: " + e.getMessage());
             return false;
         }
     }
@@ -72,13 +80,17 @@ public class EmployeeServiceImpl implements EmployeeService {
             auditLogger.log();
             Employee employee = getEmployeeById(id);
             employeeValidator.validate(employee);
-            if (percentage <= maxRaise) {
-                employee.setSalary(employee.getSalary() * (1 + percentage / 100));
-                notificationManager.sendNotification("Employee " + employee.getName() + " got a raise with " + percentage + "%");
-                auditLogger.log();
-            } else {
+            if (percentage > maxRaise) {
                 System.out.println("Max raise percentage is: " + maxRaise + "%");
+                return;
             }
+
+            employee.setSalary(employee.getSalary() * (1 + percentage / 100));
+            notificationManager.sendNotification(
+                    "Employee " + employee.getName() +
+                            " got a raise with " + percentage + "%"
+            );
+            auditLogger.log();
         } catch (InvalidEmployeeException e) {
             System.out.println("No such employee exists");
             auditLogger.log();
