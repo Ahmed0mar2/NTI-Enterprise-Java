@@ -28,3 +28,7 @@ out/
 Thumbs.db
 *.swp
 *.swo
+
+untitled/
+untitled1/
+spring-bean-lifecycle-xml/
