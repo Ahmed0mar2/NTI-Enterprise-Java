@@ -1,4 +1,4 @@
-package JDKProxy;
+package JDKProxy.dynamic;
 
 public interface NotificationService {
     void sendEmail(String to, String message);

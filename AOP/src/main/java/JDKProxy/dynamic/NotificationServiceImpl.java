@@ -1,4 +1,4 @@
-package JDKProxy;
+package JDKProxy.dynamic;
 
 public class NotificationServiceImpl implements NotificationService {
     @Override
