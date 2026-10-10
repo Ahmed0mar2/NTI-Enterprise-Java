@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Store</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Products Catalog</h1>
+        <a href="login.html">Login</a>
+        <div id="productsGrid" class="grid"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        let products = JSON.parse(localStorage.getItem('products')) || [];
+        let grid = document.getElementById('productsGrid');
+        
+        grid.innerHTML = products.map(p => `
+            <div class="card">
+                <img src="${p.image}" alt="${p.name}">
+                <h3>${p.name}</h3>
+                <p>$${p.price}</p>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>

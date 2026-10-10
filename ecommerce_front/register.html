@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container" style="max-width: 400px; margin-top: 50px;">
+        <h2>Register</h2>
+        <div id="errorMsg" style="color: #dc3545; margin-bottom: 10px; font-size: 14px;"></div>
+        <form id="regForm">
+            <label>Name</label>
+            <input type="text" id="name" required>
+
+            <label>Email</label>
+            <input type="email" id="email" required>
+
+            <label>Password</label>
+            <input type="password" id="password" required>
+
+            <button type="submit">Register</button>
+        </form>
+        <p style="margin-top: 15px; text-align: center;">Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.getElementById('regForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            let existing = users.find(u => u.email === email);
+
+            if (existing) {
+                document.getElementById('errorMsg').innerText = 'Email already exists.';
+                return;
+            }
+
+            let newUser = {
+                id: Date.now().toString(),
+                name,
+                email,
+                password,
+                role: 'customer'
+            };
+
+            users.push(newUser);
+            localStorage.setItem('users', JSON.stringify(users));
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+
+</html>
